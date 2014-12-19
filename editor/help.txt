@@ -1,0 +1,4 @@
+Simply launch editor.html to launch text-editor
+The Entire Text Editor code can be easily read 
+as i have provided detailed comments on almost all steps
+To edit any file simple go along the comments and feel free to edit

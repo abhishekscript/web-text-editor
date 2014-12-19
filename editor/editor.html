@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="css/pad.css">  <!-- import style css to this page -->
+<script src="scripts/pad.js"></script>					<!-- import pad.js for text based operations-->
+<script src="scripts/jquery.js"></script>				<!-- import the library jQuery visit jQuery.com for any documenttation related to it-->
+<script>
+$(document).ready(function() {
+$('#colorplate').hide();
+$('#pad').on('scroll', function () {		// set action .on with #pad so that on scrolling both numbers and text scroll together
+    $('#padnumbers').scrollTop($('#pad').scrollTop());		// scroll #padnumbers if #pad is scrolled
+});
+
+$('#colorchange').click(function() {                // when click on button A show color plate
+$('#colorplate').show();
+
+});
+
+$('#quit').click(function() {  				// close colorplate when Quit is selected
+$('#colorplate').hide();
+});
+
+$('#ok').click(function() {					// close colorplate after a color has been selected
+$('#colorplate').hide();
+});
+
+});
+
+/* helping script */
+$("textarea").keydown(function(e) {
+    if(e.keyCode === 9) { // tab was pressed
+        // get caret position/selection
+        var start = this.selectionStart;
+        var end = this.selectionEnd;
+
+        var $this = $(this);
+        var value = $this.val();
+
+        // set textarea value to: text before caret + tab + text after caret
+        $this.val(value.substring(0, start)
+                    + "\t"
+                    + value.substring(end));
+
+        // put caret at right position again (add one for the tab)
+        this.selectionStart = this.selectionEnd = start + 1;
+
+        // prevent the focus lose
+        e.preventDefault();
+    }
+});
+
+
+</script>
+
+
+
+
+
+<body onload="document.getElementById('pad').focus();">
+<div id="importpad">             <!-- parent division -->
+	<div id="editorarea">		<!-- editor div -->
+		<div id="padmenu">		<!-- menu div -->
+			<table>
+					<td><input type="button" value=" B " onClick="bold()"></td>    <!-- call bold() method to change font to bold -->
+					<td><input type="button" value="  I  " onClick="italics()"></td>  <!-- call italics() method to change font to italics -->
+					<td>
+						<select name="fontfamily" id="fontfamily" onChange="fontChange()">  <!-- call fontChange() method to change font -->
+							<option value="Arial">Arial</option>
+							<option value="Impact">Impact</option>
+							<option value="Helvetica">Helvetica</option>
+							<option value="Lucida Console">Lucida Console</option>		<!-- list any font here you wish to add -->
+							<option value="Regular">Regular</option>
+							<!--Add as many font-family as you like -->
+						</select>
+					</td>
+					<td>
+						<select name="fontsize" id="fontsize" onChange="fontSize()">   <!-- list the font size you wish to see in textarea -->
+							<option value="10px">10 px </option>
+							<option value="11px">11 px</option>
+							<option value="12px">12 px </option>
+							<option value="13px">13 px</option>
+							<option value="14px">14 px</option>
+							<option value="15px">15 px</option>
+							<option value="16px">16 px</option>
+							<option value="17px">17 px</option>
+							<option value="18px">18 px</option>
+							<option value="19px">19 px</option>
+							<option value="20px">20 px</option>
+							<!--Add as many font size you want -->
+						</select>
+					
+					</td>
+					<td><input type="button" value="A" style="color:#ff0000;" id="colorchange"></td>
+
+			</table>
+		</div>
+		<span style="padding-left:0px;position:absolute;">
+			<textarea name="padnumbers" id="padnumbers" disabled readonly>0</textarea>  <!-- numbers are shown as new line begins -->
+		</span>
+		<span style="padding-left:36px;position:absolute;">
+
+			<textarea id="pad" name="pad" onkeydown="line(event)" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" onblur="document.getElementById('pad').focus()" onChange="document.getElementById('pad').focus();"></textarea>
+			<!-- the above textarea where text-edit will be done -->
+		</span>
+		<!--Division Area where total words and characters calculated are shown -->
+		<div id="bottom" style="background:#f0f0f0;"> Total Words : <input type="text" id="words" name="words" disabled>
+		Total Characters : <input type="text" id="chars" name="chars" disabled></div>
+	</div>
+	
+	
+	
+</div>
+<span id="colorplate">
+<table>
+	<tr><!--Set Different Buttons And Associate A color With it -->            <!--onClick change the color -->
+		<td><input type="button" class="boxbutton" style="background:#000000;" onClick=document.getElementById('pad').style.color="#000000";></td>
+		<td><input type="button" class="boxbutton" style="background:#7F7F7F;" onClick=document.getElementById('pad').style.color="#7F7F7F";></td>
+		<td><input type="button" class="boxbutton" style="background:#880015;" onClick=document.getElementById('pad').style.color="#880015";></td>
+		<td><input type="button" class="boxbutton" style="background:#ED1C24;" onClick=document.getElementById('pad').style.color="#ED1C24";></td>
+		<td><input type="button" class="boxbutton" style="background:#FFF200;" onClick=document.getElementById('pad').style.color="#FFF200";></td>
+		<td><input type="button" class="boxbutton" style="background:#22B14C;" onClick=document.getElementById('pad').style.color="#22B14C";></td>
+		<td><input type="button" class="boxbutton" style="background:#00A2E8;" onClick=document.getElementById('pad').style.color="#00A2E8";></td>
+		<td><input type="button" class="boxbutton" style="background:#3F48CC;" onClick=document.getElementById('pad').style.color="#3F48CC";></td>
+	</tr>
+	<tr><!--Set Different Buttons And Associate A color With it -->            <!--onClick change the color -->
+		<td><input type="button" class="boxbutton" style="background:#A349A4;" onClick=document.getElementById('pad').style.color="#A349A4";></td>
+		<td><input type="button" class="boxbutton" style="background:#B97A57;" onClick=document.getElementById('pad').style.color="#B97A57";></td>
+		<td><input type="button" class="boxbutton" style="background:#FFAEC9;" onClick=document.getElementById('pad').style.color="#FFAEC9";></td>
+		<td><input type="button" class="boxbutton" style="background:#FFC90E;" onClick=document.getElementById('pad').style.color="#FFC90E";></td>
+		<td><input type="button" class="boxbutton" style="background:#B5E61D;" onClick=document.getElementById('pad').style.color="#B5E61D";></td>
+		<td><input type="button" class="boxbutton" style="background:#99D9EA;" onClick=document.getElementById('pad').style.color="#99D9EA";></td>
+		<td><input type="button" class="boxbutton" style="background:#7092BE;" onClick=document.getElementById('pad').style.color="#7092BE";></td>
+		<td><input type="button" class="boxbutton" style="background:#dddddd;" onClick=document.getElementById('pad').style.color="#dddddd";></td>
+	</tr>
+
+
+</table>	
+	
+		&nbsp; &nbsp; &nbsp; <input type="button" value=" Ok " style="background:#00a2e8;color:#ffffff;border-style:none;height:30px;width:60px;" id="ok">
+		<input type="button" value="Quit"  style="background:#ed1c24;color:#ffffff;border-style:none;height:30px;width:60px;"  onClick=document.getElementById('pad').style.color="#000000"; id="quit">
+	
+</span>
+</body>
+<!html>
